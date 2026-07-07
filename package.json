@@ -1,0 +1,13 @@
+{
+  "name": "stadium-copilot",
+  "version": "1.0.0",
+  "description": "GenAI-powered assistant for stadium navigation, crowd guidance, accessibility, and multilingual fan support — built for PromptWars Challenge 4 (Smart Stadiums & Tournament Operations).",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

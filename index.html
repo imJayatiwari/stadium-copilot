@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stadium Copilot — Smart Stadium Assistant</title>
+<meta name="description" content="GenAI-powered assistant for navigation, crowd guidance, accessibility, and multilingual support at FIFA World Cup 2026 stadiums." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div class="brand-text">
+      <span class="brand-name">Stadium Copilot</span>
+      <span class="brand-sub">FIFA World Cup 2026 · Match-day AI Assistant</span>
+    </div>
+  </div>
+
+  <div class="topbar-controls">
+    <label class="control">
+      <span class="control-label">Language</span>
+      <select id="languageSelect" aria-label="Choose response language">
+        <option>English</option>
+        <option>Spanish</option>
+        <option>Portuguese</option>
+        <option>French</option>
+        <option>Arabic</option>
+        <option>Hindi</option>
+        <option>German</option>
+        <option>Japanese</option>
+        <option>Korean</option>
+      </select>
+    </label>
+
+    <button id="a11yToggle" class="a11y-toggle" type="button" aria-pressed="false">
+      <span aria-hidden="true">◐</span> Accessibility mode
+    </button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Main sections">
+  <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-assistant" id="tab-assistant" data-panel="panel-assistant">Fan Assistant</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-gates" id="tab-gates" data-panel="panel-gates">Gate Board</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-volunteer" id="tab-volunteer" data-panel="panel-volunteer">Volunteer Console</button>
+</nav>
+
+<main id="main">
+
+  <!-- ============ FAN ASSISTANT ============ -->
+  <section id="panel-assistant" class="panel is-active" role="tabpanel" aria-labelledby="tab-assistant">
+    <div class="panel-intro">
+      <h1>Ask anything, in your language</h1>
+      <p>Navigation, seating, transport, food, medical points, accessibility routes — Stadium Copilot answers instantly, translated for you.</p>
+    </div>
+
+    <div class="chat-shell">
+      <div id="chatLog" class="chat-log" role="log" aria-live="polite" aria-label="Conversation with Stadium Copilot"></div>
+
+      <div class="quick-prompts" aria-label="Suggested questions">
+        <button class="chip" type="button">Where's the nearest accessible restroom?</button>
+        <button class="chip" type="button">How do I get to Gate C from the metro?</button>
+        <button class="chip" type="button">Is there a quiet space for sensory breaks?</button>
+      </div>
+
+      <form id="chatForm" class="chat-form">
+        <label class="sr-only" for="chatInput">Type your question</label>
+        <input id="chatInput" type="text" placeholder="Type your question…" maxlength="800" autocomplete="off" />
+        <button type="submit" id="chatSend">Send</button>
+      </form>
+      <p class="hint">Answers are AI-generated and may not reflect real-time venue signage — confirm anything safety-critical with on-site staff.</p>
+    </div>
+  </section>
+
+  <!-- ============ GATE BOARD ============ -->
+  <section id="panel-gates" class="panel" role="tabpanel" aria-labelledby="tab-gates" hidden>
+    <div class="panel-intro">
+      <h1>Live Gate Board</h1>
+      <p>Simulated real-time crowd density per gate, with an AI recommendation refreshed every few seconds.</p>
+    </div>
+
+    <div class="ai-banner" id="gateRecommendation" aria-live="polite">
+      <span class="ai-banner-icon" aria-hidden="true">✦</span>
+      <span id="gateRecommendationText">Reading live gate data…</span>
+    </div>
+
+    <div class="board" id="gateBoard" role="table" aria-label="Live gate crowd levels"></div>
+
+    <p class="hint">Gate sensor data is simulated for this demo. In production this would connect to real turnstile / camera-based crowd counters.</p>
+  </section>
+
+  <!-- ============ VOLUNTEER CONSOLE ============ -->
+  <section id="panel-volunteer" class="panel" role="tabpanel" aria-labelledby="tab-volunteer" hidden>
+    <div class="panel-intro">
+      <h1>Volunteer Console</h1>
+      <p>Turn a quick, informal note into a clear dispatch message for the operations team.</p>
+    </div>
+
+    <div class="board-table-wrap">
+      <table class="ops-table" id="opsTable">
+        <caption class="sr-only">Current gate crowd levels, staff view</caption>
+        <thead>
+          <tr><th scope="col">Gate</th><th scope="col">Crowd level</th><th scope="col">Status</th></tr>
+        </thead>
+        <tbody id="opsTableBody"></tbody>
+      </table>
+    </div>
+
+    <form id="briefingForm" class="briefing-form">
+      <label for="briefingInput">Incident note</label>
+      <textarea id="briefingInput" rows="3" maxlength="800" placeholder="e.g. long queue building at gate B, one wheelchair user waiting 10 min"></textarea>
+      <button type="submit">Generate dispatch message</button>
+    </form>
+
+    <div id="briefingOutput" class="briefing-output" aria-live="polite" hidden></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  Built for PromptWars · Challenge 4 — Smart Stadiums &amp; Tournament Operations
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
